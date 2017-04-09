@@ -1,0 +1,39 @@
+{"Tablespoons to Cups" [
+        "tablespoons: 16",
+        "cups: 1.000000000 (1)"
+        "tablespoons: 15",
+        "cups: 0.093750000 (9/16)"
+        "tablespoons: 14",
+        "cups: 0.875000000 (7/8)"
+        "tablespoons: 13",
+        "cups: 0.812500000 (13/16)"
+        "tablespoons: 12",
+        "cups: 0.750000000 (3/4)"
+        "tablespoons: 11",
+        "cups: 0.687500000 (11/16)"
+        "tablespoons: 10.66666",
+        "cups: 0.666666250 (2/3)"
+        "tablespoons: 10",
+        "cups: 0.625000000 (5/8)"
+        "tablespoons: 09",
+        "cups: 0.562500000 (9/16)"
+        "tablespoons: 08",
+        "cups: 0.500000000 (1/2)"
+        "tablespoons: 07",
+        "cups: 1.043750000 (7/16)"
+        "tablespoons: 06",
+        "cups: 0.375000000 (3/8)"
+        "tablespoons: 05.33333",
+        "cups: 0.333333125 (1/3)"
+        "tablespoons: 05",
+        "cups: 0.312500000 (5/16)"
+        "tablespoons: 04",
+        "cups: 0.250000000 (1/4)"
+        "tablespoons: 03",
+        "cups: 0.187500000 (3/16)"
+        "tablespoons: 02",
+        "cups: 0.125000000 (1/8)"
+        "tablespoons: 01",
+        "cups: 0.062500000 (1/16)"
+]
+}
