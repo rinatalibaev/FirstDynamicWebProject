@@ -2,6 +2,7 @@ package ejb;
 
 import java.util.List;
 
+import javax.annotation.PreDestroy;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -14,7 +15,12 @@ import entity.Employee;
 @Stateless
 public class EmployeeEJB {
 
-	@PersistenceContext
+	@PreDestroy
+	public void destruct() {
+		em.close();
+	}
+
+	@PersistenceContext(unitName = "FirstDynamicWebProject")
 	EntityManager em;
 
 	public void saveEmployee(Employee employee) {

@@ -1,21 +1,28 @@
 package entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
- * The persistent class for the documents database table.
+ * The persistent class for the Documents database table.
  * 
  */
 @Entity
-@Table(name="documents")
-@NamedQuery(name="Document.findAll", query="SELECT d FROM Document d")
+@Table(name = "Documents")
+@NamedQuery(name = "Document.findAll", query = "SELECT d FROM Document d")
 public class Document implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private String docDate;
@@ -26,30 +33,30 @@ public class Document implements Serializable {
 
 	private String docServerPath;
 
-	//bi-directional many-to-one association to Docstatus
+	// bi-directional many-to-one association to DocStatus
 	@ManyToOne
-	@JoinColumn(name="DocStatusName")
-	private Docstatus docstatus;
+	@JoinColumn(name = "DocStatusName")
+	private DocStatus docStatus;
 
-	//bi-directional many-to-one association to Doctype
+	// bi-directional many-to-one association to DocType
 	@ManyToOne
-	@JoinColumn(name="docType")
-	private Doctype doctype;
+	@JoinColumn(name = "docType")
+	private DocType docTypeBean;
 
-	//bi-directional many-to-one association to Employee
+	// bi-directional many-to-one association to Employee
 	@ManyToOne
-	@JoinColumn(name="docInsertedEmployee")
+	@JoinColumn(name = "docInsertedEmployee")
 	private Employee employee1;
 
-	//bi-directional many-to-one association to Employee
+	// bi-directional many-to-one association to Employee
 	@ManyToOne
-	@JoinColumn(name="docEndReceiverEmployee")
+	@JoinColumn(name = "docEndReceiverEmployee")
 	private Employee employee2;
 
-	//bi-directional many-to-one association to Mailorder
+	// bi-directional many-to-one association to MailOrder
 	@ManyToOne
-	@JoinColumn(name="mailOrdDocuments")
-	private Mailorder mailorder;
+	@JoinColumn(name = "mailOrdDocuments")
+	private MailOrder mailOrder;
 
 	public Document() {
 	}
@@ -94,20 +101,20 @@ public class Document implements Serializable {
 		this.docServerPath = docServerPath;
 	}
 
-	public Docstatus getDocstatus() {
-		return this.docstatus;
+	public DocStatus getDocStatus() {
+		return this.docStatus;
 	}
 
-	public void setDocstatus(Docstatus docstatus) {
-		this.docstatus = docstatus;
+	public void setDocStatus(DocStatus docStatus) {
+		this.docStatus = docStatus;
 	}
 
-	public Doctype getDoctype() {
-		return this.doctype;
+	public DocType getDocTypeBean() {
+		return this.docTypeBean;
 	}
 
-	public void setDoctype(Doctype doctype) {
-		this.doctype = doctype;
+	public void setDocTypeBean(DocType docTypeBean) {
+		this.docTypeBean = docTypeBean;
 	}
 
 	public Employee getEmployee1() {
@@ -126,12 +133,12 @@ public class Document implements Serializable {
 		this.employee2 = employee2;
 	}
 
-	public Mailorder getMailorder() {
-		return this.mailorder;
+	public MailOrder getMailOrder() {
+		return this.mailOrder;
 	}
 
-	public void setMailorder(Mailorder mailorder) {
-		this.mailorder = mailorder;
+	public void setMailOrder(MailOrder mailOrder) {
+		this.mailOrder = mailOrder;
 	}
 
 }

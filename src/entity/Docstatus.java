@@ -2,30 +2,26 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
- * The persistent class for the docstatuses database table.
+ * The persistent class for the DocStatuses database table.
  * 
  */
 @Entity
-@Table(name="docstatuses")
-@NamedQuery(name="Docstatus.findAll", query="SELECT d FROM Docstatus d")
-public class Docstatus implements Serializable {
+@Table(name="DocStatuses")
+@NamedQuery(name="DocStatus.findAll", query="SELECT d FROM DocStatus d")
+public class DocStatus implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@Column(name="DocStatusName")
 	private String docStatusName;
 
-	//bi-directional many-to-one association to Document
-	@OneToMany(mappedBy="docstatus")
-	private List<Document> documents;
-
-	public Docstatus() {
+	public DocStatus() {
 	}
 
 	public int getId() {
@@ -42,28 +38,6 @@ public class Docstatus implements Serializable {
 
 	public void setDocStatusName(String docStatusName) {
 		this.docStatusName = docStatusName;
-	}
-
-	public List<Document> getDocuments() {
-		return this.documents;
-	}
-
-	public void setDocuments(List<Document> documents) {
-		this.documents = documents;
-	}
-
-	public Document addDocument(Document document) {
-		getDocuments().add(document);
-		document.setDocstatus(this);
-
-		return document;
-	}
-
-	public Document removeDocument(Document document) {
-		getDocuments().remove(document);
-		document.setDocstatus(null);
-
-		return document;
 	}
 
 }

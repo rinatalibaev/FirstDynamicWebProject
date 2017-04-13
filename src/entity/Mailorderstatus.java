@@ -6,26 +6,27 @@ import java.util.List;
 
 
 /**
- * The persistent class for the mailorderstatuses database table.
+ * The persistent class for the MailOrderStatuses database table.
  * 
  */
 @Entity
-@Table(name="mailorderstatuses")
-@NamedQuery(name="Mailorderstatus.findAll", query="SELECT m FROM Mailorderstatus m")
-public class Mailorderstatus implements Serializable {
+@Table(name="MailOrderStatuses")
+@NamedQuery(name="MailOrderStatus.findAll", query="SELECT m FROM MailOrderStatus m")
+public class MailOrderStatus implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@Column(name="MailOrderStatus")
 	private String mailOrderStatus;
 
-	//bi-directional many-to-one association to Mailorder
-	@OneToMany(mappedBy="mailorderstatus")
-	private List<Mailorder> mailorders;
+	//bi-directional many-to-one association to MailOrder
+	@OneToMany(mappedBy="mailOrderStatus")
+	private List<MailOrder> mailOrders;
 
-	public Mailorderstatus() {
+	public MailOrderStatus() {
 	}
 
 	public int getId() {
@@ -44,26 +45,26 @@ public class Mailorderstatus implements Serializable {
 		this.mailOrderStatus = mailOrderStatus;
 	}
 
-	public List<Mailorder> getMailorders() {
-		return this.mailorders;
+	public List<MailOrder> getMailOrders() {
+		return this.mailOrders;
 	}
 
-	public void setMailorders(List<Mailorder> mailorders) {
-		this.mailorders = mailorders;
+	public void setMailOrders(List<MailOrder> mailOrders) {
+		this.mailOrders = mailOrders;
 	}
 
-	public Mailorder addMailorder(Mailorder mailorder) {
-		getMailorders().add(mailorder);
-		mailorder.setMailorderstatus(this);
+	public MailOrder addMailOrder(MailOrder mailOrder) {
+		getMailOrders().add(mailOrder);
+		mailOrder.setMailOrderStatus(this);
 
-		return mailorder;
+		return mailOrder;
 	}
 
-	public Mailorder removeMailorder(Mailorder mailorder) {
-		getMailorders().remove(mailorder);
-		mailorder.setMailorderstatus(null);
+	public MailOrder removeMailOrder(MailOrder mailOrder) {
+		getMailOrders().remove(mailOrder);
+		mailOrder.setMailOrderStatus(null);
 
-		return mailorder;
+		return mailOrder;
 	}
 
 }

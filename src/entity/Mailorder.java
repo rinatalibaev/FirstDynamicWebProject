@@ -1,22 +1,31 @@
 package entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
- * The persistent class for the mailorder database table.
+ * The persistent class for the MailOrder database table.
  * 
  */
 @Entity
-@NamedQuery(name="Mailorder.findAll", query="SELECT m FROM Mailorder m")
-public class Mailorder implements Serializable {
+@NamedQuery(name = "MailOrder.findAll", query = "SELECT m FROM MailOrder m")
+public class MailOrder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -39,31 +48,31 @@ public class Mailorder implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date mailVizovKurieraDate;
 
-	//bi-directional many-to-one association to Document
-	@OneToMany(mappedBy="mailorder")
+	// bi-directional many-to-one association to Document
+	@OneToMany(mappedBy = "mailOrder")
 	private List<Document> documents;
 
-	//bi-directional many-to-one association to Employee
+	// bi-directional many-to-one association to Employee
 	@ManyToOne
-	@JoinColumn(name="mailOrdEndReceiverNo")
+	@JoinColumn(name = "mailOrdEndReceiverNo")
 	private Employee employee1;
 
-	//bi-directional many-to-one association to Employee
+	// bi-directional many-to-one association to Employee
 	@ManyToOne
-	@JoinColumn(name="mailOrdSenderNo")
+	@JoinColumn(name = "mailOrdSenderNo")
 	private Employee employee2;
 
-	//bi-directional many-to-one association to Employee
+	// bi-directional many-to-one association to Employee
 	@ManyToOne
-	@JoinColumn(name="mailOrdReceiverNo")
+	@JoinColumn(name = "mailOrdReceiverNo")
 	private Employee employee3;
 
-	//bi-directional many-to-one association to Mailorderstatus
+	// bi-directional many-to-one association to MailOrderStatus
 	@ManyToOne
-	@JoinColumn(name="mailOrdStatus")
-	private Mailorderstatus mailorderstatus;
+	@JoinColumn(name = "mailOrdStatus")
+	private MailOrderStatus mailOrderStatus;
 
-	public Mailorder() {
+	public MailOrder() {
 	}
 
 	public int getId() {
@@ -140,15 +149,11 @@ public class Mailorder implements Serializable {
 
 	public Document addDocument(Document document) {
 		getDocuments().add(document);
-		document.setMailorder(this);
-
 		return document;
 	}
 
 	public Document removeDocument(Document document) {
 		getDocuments().remove(document);
-		document.setMailorder(null);
-
 		return document;
 	}
 
@@ -176,12 +181,12 @@ public class Mailorder implements Serializable {
 		this.employee3 = employee3;
 	}
 
-	public Mailorderstatus getMailorderstatus() {
-		return this.mailorderstatus;
+	public MailOrderStatus getMailOrderStatus() {
+		return this.mailOrderStatus;
 	}
 
-	public void setMailorderstatus(Mailorderstatus mailorderstatus) {
-		this.mailorderstatus = mailorderstatus;
+	public void setMailOrderStatus(MailOrderStatus mailOrderStatus) {
+		this.mailOrderStatus = mailOrderStatus;
 	}
 
 }

@@ -7,12 +7,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * The persistent class for the employee database table.
+ * The persistent class for the Employee database table.
  * 
  */
 @Entity
+// @Cache(alwaysRefresh = true, refreshOnlyIfNewer = true)
+@Cache(usage = CacheConcurrencyStrategy.NONE)
+@Table(name = "Employee")
 @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
 public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -171,4 +178,5 @@ public class Employee implements Serializable {
 	public void setEmpSurname(String empSurname) {
 		this.empSurname = empSurname;
 	}
+
 }

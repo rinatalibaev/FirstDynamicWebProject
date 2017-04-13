@@ -2,32 +2,29 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
- * The persistent class for the doctypes database table.
+ * The persistent class for the DocTypes database table.
  * 
  */
 @Entity
-@Table(name="doctypes")
-@NamedQuery(name="Doctype.findAll", query="SELECT d FROM Doctype d")
-public class Doctype implements Serializable {
+@Table(name="DocTypes")
+@NamedQuery(name="DocType.findAll", query="SELECT d FROM DocType d")
+public class DocType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@Column(name="DocType")
 	private String docType;
 
+	@Column(name="DocTypeName")
 	private String docTypeName;
 
-	//bi-directional many-to-one association to Document
-	@OneToMany(mappedBy="doctype")
-	private List<Document> documents;
-
-	public Doctype() {
+	public DocType() {
 	}
 
 	public int getId() {
@@ -52,28 +49,6 @@ public class Doctype implements Serializable {
 
 	public void setDocTypeName(String docTypeName) {
 		this.docTypeName = docTypeName;
-	}
-
-	public List<Document> getDocuments() {
-		return this.documents;
-	}
-
-	public void setDocuments(List<Document> documents) {
-		this.documents = documents;
-	}
-
-	public Document addDocument(Document document) {
-		getDocuments().add(document);
-		document.setDoctype(this);
-
-		return document;
-	}
-
-	public Document removeDocument(Document document) {
-		getDocuments().remove(document);
-		document.setDoctype(null);
-
-		return document;
 	}
 
 }
