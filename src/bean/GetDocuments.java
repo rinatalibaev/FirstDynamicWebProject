@@ -1,5 +1,7 @@
 package bean;
 
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.DenyAll;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -9,27 +11,31 @@ import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 
-import ejb.EmployeeEJB;
-import interfaces.Secured;
+import ejb.DocumentsEJB;
 
+@DeclareRoles({ "TutorialUser", "AnotherUser" })
 @ApplicationScoped
-@Path("/getemployees")
-public class GetEmployees {
+@Path("/getdocuments")
+public class GetDocuments {
 
 	@Inject
-	EmployeeEJB employeeEJB;
+	DocumentsEJB documentsEJB;
 
+	// @RolesAllowed("TutorialUser")
+	@DenyAll
 	@GET
-	@Secured
 	@Produces("application/json; charset=utf-8")
-	public Response getAllEmployees() throws Exception {
+	public Response getAllDocuments() throws Exception {
 		Gson gson = new Gson();
 		String jsonString = null;
 		try {
-			jsonString = gson.toJson(employeeEJB.getAll());
+			jsonString = gson.toJson(documentsEJB.getAll());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(jsonString);
 		return Response.status(200).entity(jsonString).build();
+
 	}
+
 }

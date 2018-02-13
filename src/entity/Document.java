@@ -11,11 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * The persistent class for the Documents database table.
  * 
  */
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.NONE)
 @Table(name = "Documents")
 @NamedQuery(name = "Document.findAll", query = "SELECT d FROM Document d")
 public class Document implements Serializable {
@@ -41,17 +45,17 @@ public class Document implements Serializable {
 	// bi-directional many-to-one association to DocType
 	@ManyToOne
 	@JoinColumn(name = "docType")
-	private DocType docTypeBean;
+	private DocType docType;
 
 	// bi-directional many-to-one association to Employee
 	@ManyToOne
 	@JoinColumn(name = "docInsertedEmployee")
-	private Employee employee1;
+	private Employee docInsertedEmployee;
 
 	// bi-directional many-to-one association to Employee
 	@ManyToOne
 	@JoinColumn(name = "docEndReceiverEmployee")
-	private Employee employee2;
+	private Employee docEndReceiverEmployee;
 
 	// bi-directional many-to-one association to MailOrder
 	@ManyToOne
@@ -110,27 +114,27 @@ public class Document implements Serializable {
 	}
 
 	public DocType getDocTypeBean() {
-		return this.docTypeBean;
+		return this.docType;
 	}
 
 	public void setDocTypeBean(DocType docTypeBean) {
-		this.docTypeBean = docTypeBean;
+		this.docType = docTypeBean;
 	}
 
 	public Employee getEmployee1() {
-		return this.employee1;
+		return this.docInsertedEmployee;
 	}
 
 	public void setEmployee1(Employee employee1) {
-		this.employee1 = employee1;
+		this.docInsertedEmployee = employee1;
 	}
 
 	public Employee getEmployee2() {
-		return this.employee2;
+		return this.docEndReceiverEmployee;
 	}
 
 	public void setEmployee2(Employee employee2) {
-		this.employee2 = employee2;
+		this.docEndReceiverEmployee = employee2;
 	}
 
 	public MailOrder getMailOrder() {

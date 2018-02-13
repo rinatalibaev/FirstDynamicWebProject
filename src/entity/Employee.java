@@ -1,31 +1,20 @@
 package entity;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * The persistent class for the Employee database table.
+ * The persistent class for the employee database table.
  * 
  */
 @Entity
-// @Cache(alwaysRefresh = true, refreshOnlyIfNewer = true)
-@Cache(usage = CacheConcurrencyStrategy.NONE)
-@Table(name = "Employee")
-@NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
+@NamedQuery(name="Employee.findAll", query="SELECT e FROM Employee e")
 public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String empCity;
@@ -55,6 +44,11 @@ public class Employee implements Serializable {
 	private String empStreet;
 
 	private String empSurname;
+
+	//bi-directional one-to-one association to User
+	@OneToOne
+	@JoinColumn(name="userID")
+	private User user;
 
 	public Employee() {
 	}
@@ -177,6 +171,14 @@ public class Employee implements Serializable {
 
 	public void setEmpSurname(String empSurname) {
 		this.empSurname = empSurname;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

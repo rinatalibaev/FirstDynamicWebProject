@@ -1,8 +1,8 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,15 +11,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * The persistent class for the MailOrder database table.
  * 
  */
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.NONE)
+@Table(name = "MailOrder")
 @NamedQuery(name = "MailOrder.findAll", query = "SELECT m FROM MailOrder m")
 public class MailOrder implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -28,29 +31,29 @@ public class MailOrder implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date mailOrdCreateDate;
+	// @Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime mailOrdCreateDate;
 
 	private String mailOrdDocuments;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date mailOrdReceivedDate;
+	// @Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime mailOrdReceivedDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date mailOrdSentDate;
+	// @Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime mailOrdSentDate;
 
-	@Temporal(TemporalType.DATE)
-	private Date mailOrdToSendDate;
+	// @Temporal(TemporalType.DATE)
+	private LocalDate mailOrdToSendDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date mailOrdVizovKurieraDate;
+	// @Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime mailOrdVizovKurieraDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date mailVizovKurieraDate;
+	// @Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime mailVizovKurieraDate;
 
-	// bi-directional many-to-one association to Document
-	@OneToMany(mappedBy = "mailOrder")
-	private List<Document> documents;
+	// // bi-directional many-to-one association to Document
+	// @OneToMany(mappedBy = "mailOrder")
+	// private List<Document> documents;
 
 	// bi-directional many-to-one association to Employee
 	@ManyToOne
@@ -60,12 +63,12 @@ public class MailOrder implements Serializable {
 	// bi-directional many-to-one association to Employee
 	@ManyToOne
 	@JoinColumn(name = "mailOrdSenderNo")
-	private Employee employee2;
+	private Employee mailOrderSender;
 
 	// bi-directional many-to-one association to Employee
 	@ManyToOne
 	@JoinColumn(name = "mailOrdReceiverNo")
-	private Employee employee3;
+	private Employee mailOrderReceiver;
 
 	// bi-directional many-to-one association to MailOrderStatus
 	@ManyToOne
@@ -83,11 +86,11 @@ public class MailOrder implements Serializable {
 		this.id = id;
 	}
 
-	public Date getMailOrdCreateDate() {
+	public LocalDateTime getMailOrdCreateDate() {
 		return this.mailOrdCreateDate;
 	}
 
-	public void setMailOrdCreateDate(Date mailOrdCreateDate) {
+	public void setMailOrdCreateDate(LocalDateTime mailOrdCreateDate) {
 		this.mailOrdCreateDate = mailOrdCreateDate;
 	}
 
@@ -99,63 +102,63 @@ public class MailOrder implements Serializable {
 		this.mailOrdDocuments = mailOrdDocuments;
 	}
 
-	public Date getMailOrdReceivedDate() {
+	public LocalDateTime getMailOrdReceivedDate() {
 		return this.mailOrdReceivedDate;
 	}
 
-	public void setMailOrdReceivedDate(Date mailOrdReceivedDate) {
+	public void setMailOrdReceivedDate(LocalDateTime mailOrdReceivedDate) {
 		this.mailOrdReceivedDate = mailOrdReceivedDate;
 	}
 
-	public Date getMailOrdSentDate() {
+	public LocalDateTime getMailOrdSentDate() {
 		return this.mailOrdSentDate;
 	}
 
-	public void setMailOrdSentDate(Date mailOrdSentDate) {
+	public void setMailOrdSentDate(LocalDateTime mailOrdSentDate) {
 		this.mailOrdSentDate = mailOrdSentDate;
 	}
 
-	public Date getMailOrdToSendDate() {
+	public LocalDate getMailOrdToSendDate() {
 		return this.mailOrdToSendDate;
 	}
 
-	public void setMailOrdToSendDate(Date mailOrdToSendDate) {
+	public void setMailOrdToSendDate(LocalDate mailOrdToSendDate) {
 		this.mailOrdToSendDate = mailOrdToSendDate;
 	}
 
-	public Date getMailOrdVizovKurieraDate() {
+	public LocalDateTime getMailOrdVizovKurieraDate() {
 		return this.mailOrdVizovKurieraDate;
 	}
 
-	public void setMailOrdVizovKurieraDate(Date mailOrdVizovKurieraDate) {
+	public void setMailOrdVizovKurieraDate(LocalDateTime mailOrdVizovKurieraDate) {
 		this.mailOrdVizovKurieraDate = mailOrdVizovKurieraDate;
 	}
 
-	public Date getMailVizovKurieraDate() {
+	public LocalDateTime getMailVizovKurieraDate() {
 		return this.mailVizovKurieraDate;
 	}
 
-	public void setMailVizovKurieraDate(Date mailVizovKurieraDate) {
+	public void setMailVizovKurieraDate(LocalDateTime mailVizovKurieraDate) {
 		this.mailVizovKurieraDate = mailVizovKurieraDate;
 	}
 
-	public List<Document> getDocuments() {
-		return this.documents;
-	}
+	// public List<Document> getDocuments() {
+	// return this.documents;
+	// }
+	//
+	// public void setDocuments(List<Document> documents) {
+	// this.documents = documents;
+	// }
 
-	public void setDocuments(List<Document> documents) {
-		this.documents = documents;
-	}
-
-	public Document addDocument(Document document) {
-		getDocuments().add(document);
-		return document;
-	}
-
-	public Document removeDocument(Document document) {
-		getDocuments().remove(document);
-		return document;
-	}
+	// public Document addDocument(Document document) {
+	// getDocuments().add(document);
+	// return document;
+	// }
+	//
+	// public Document removeDocument(Document document) {
+	// getDocuments().remove(document);
+	// return document;
+	// }
 
 	public Employee getEmployee1() {
 		return this.employee1;
@@ -166,19 +169,19 @@ public class MailOrder implements Serializable {
 	}
 
 	public Employee getEmployee2() {
-		return this.employee2;
+		return this.mailOrderSender;
 	}
 
 	public void setEmployee2(Employee employee2) {
-		this.employee2 = employee2;
+		this.mailOrderSender = employee2;
 	}
 
 	public Employee getEmployee3() {
-		return this.employee3;
+		return this.mailOrderReceiver;
 	}
 
 	public void setEmployee3(Employee employee3) {
-		this.employee3 = employee3;
+		this.mailOrderReceiver = employee3;
 	}
 
 	public MailOrderStatus getMailOrderStatus() {

@@ -3,21 +3,8 @@
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence 
 			http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="FirstDynamicWebProject">
-<!-- 	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
-	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-<!-- 	<provider>javax.persistence.spi.PersistenceProvider</provider> -->
+	<persistence-unit name="ForthDynamicWebProject" transaction-type="JTA">
+ 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 	<jta-data-source>jdbc/second_attempt_hibernate</jta-data-source>
-	<class>entity.Document</class>
-	<class>entity.Employee</class>
-	<class>entity.MailOrder</class>
-	<class>entity.MailOrderStatus</class>
-	<class>entity.DocStatus</class>
-	<class>entity.DocType</class>
-<!-- 	<properties> -->
-<!-- 		<property name="eclipselink.cache.shared.default" value="false" /> -->
-<!-- 		<property name="eclipselink.query-results-cache" value="false"/> -->
-<!-- 		<property name="eclipselink.refresh" value="true"/> -->
-<!-- 	</properties> -->
 	</persistence-unit>
 </persistence>

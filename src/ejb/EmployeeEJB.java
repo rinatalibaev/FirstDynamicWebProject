@@ -20,7 +20,7 @@ public class EmployeeEJB {
 		em.close();
 	}
 
-	@PersistenceContext(unitName = "FirstDynamicWebProject")
+	@PersistenceContext(unitName = "ForthDynamicWebProject")
 	EntityManager em;
 
 	public void saveEmployee(Employee employee) {
